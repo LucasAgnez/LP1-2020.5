@@ -65,27 +65,7 @@ int list(int argc, char *argv[]){
   }
   return 0;
 }
-/*
-int command(int argc, char *argv[]){
-  if(argc == 2){
-    std::cout << "Insira Seu Comando: ";
-    std::string comando;
-    std::cin >> comando;
-    if("add" == comando){
-      return add(argc, argv);
-    }
-    if("list" == comando){
-      return list(argc, argv);
-    }
-  }
-  if(!strcmp(argv[2], "add")){
-		return add(argc, argv);
-	}
-	if(!strcmp(argv[2], "list")){
-		return list(argc, argv);
-  }
-}
-*/
+
 int main(int argc, char *argv[]){
 	if(argc == 1){
 		std::cout << "Uso: " << argv[0] << " <add/list>" << std::endl;
@@ -99,11 +79,6 @@ int main(int argc, char *argv[]){
 		list(argc, argv);
 		return 0;
 	}
-	/*if(!strcmp(argv[1], "command")){
-		command(argc, argv);
-		return 0;
-	}
-	*/
 	std::cout << "Uso: " << argv[0] << " <add/list>" << std::endl;
 	return 1;
 }
