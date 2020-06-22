@@ -22,7 +22,5 @@ struct Messege{
 };
 
 int verify_date();
-
-int verify_time();
   
 #endif
