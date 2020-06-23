@@ -1,6 +1,6 @@
 #include "Diary.h"
 
-Diary::Diary(const std::string& filename)
+Diary::Diary(const std::string& filename) : filename(filename)
 {
 }
 
