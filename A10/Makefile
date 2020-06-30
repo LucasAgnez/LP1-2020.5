@@ -1,12 +1,6 @@
 GCC = g++
 GCC_FLAGS = -I include -std=c++11
 PROGRAMA = diary
-MATRICULA = 20190041412
-
-all: $(PROGRAMA) zip
-
-zip: src/* include/*
-	zip $(MATRICULA).zip src/* include/*
 
 $(PROGRAMA): main.o App.o Diary.o Date.o Time.o DateTime.o
 	$(GCC) $(GCC_FLAGS) -o diary *.o
@@ -28,5 +22,3 @@ Time.o: src/Time.cpp include/Time.h
 
 DateTime.o: src/DateTime.cpp include/DateTime.h
 	$(GCC) $(GCC_FLAGS) -c src/DateTime.cpp
-
-.PHONY: all zip
