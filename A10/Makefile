@@ -5,7 +5,7 @@ PROGRAMA = diary
 $(PROGRAMA): main.o App.o Diary.o Date.o Time.o DateTime.o
 	$(GCC) $(GCC_FLAGS) -o diary *.o
 
-main.o: src/main.cpp 
+main.o: src/main.cpp
 	$(GCC) $(GCC_FLAGS) -c src/main.cpp
 
 App.o: src/App.cpp include/App.h
