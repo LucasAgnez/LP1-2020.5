@@ -2,7 +2,7 @@
 #define W5_CLIENTE_H
 
 #include "Cliente.h"
-#include "Produtos.h"
+#include "Produto.h"
 #include "Estabelecimento.h"
 
 #include <iostream>

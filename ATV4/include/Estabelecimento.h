@@ -2,7 +2,7 @@
 #define W5_ESTABELECIMENTO_H
 
 #include "Estabelecimento.h"
-#include "Produtos.h"
+#include "Produto.h"
 #include "App.h"
 
 #include <iostream>

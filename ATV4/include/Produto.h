@@ -1,7 +1,7 @@
-#ifndef W5_PRODUTOS_H
-#define W5_PRODUTOS_H
+#ifndef W5_PRODUTO_H
+#define W5_PRODUTO_H
 
-#include "Produtos.h"
+#include "Produto.h"
 #include <string>
 
 struct Produto{
