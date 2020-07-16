@@ -1,5 +1,17 @@
+*
+
+!*.*
+!*/
+!Makefile
+
+*.o
+*.zip
+*.vscode/*
+
 *.o
 *.swp
 *.swo
 *.out
 *.md
+
+
