@@ -1,11 +1,12 @@
 GCC = g++
 GCC_FLAGS = -I include -std=c++11
-WARNINGS = -Wall -Wextra -pedantic -Wshadow -Wformat=2 -Wno-unused-result      \
-	-Wfloat-equal -Wconversion -Wlogical-op -Wshift-overflow=2                 \
-	-Wduplicated-cond -Wcast-qual -Wcast-align
 PROGRAMA = supermercado
 
+<<<<<<< HEAD
 $(PROGRAMA): main.o  App.o Estabelecimento.o Cliente.o VectorSupermercado.o Fornecedor.o
+=======
+$(PROGRAMA): main.o  App.o Estabelecimento.o Cliente.o Fornecedor.o VectorSupermercado.o
+>>>>>>> refs/remotes/origin/Agnez
 	$(GCC) $(GCC_FLAGS) -o supermercado *.o
 
 main.o: src/main.cpp

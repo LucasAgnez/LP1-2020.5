@@ -8,6 +8,7 @@ class Fornecedor
 {
 private:
   VectorSupermercado<Produto> produtos;
+  int quantidade_produtos;
   void load();
   void update();
 
@@ -16,13 +17,6 @@ public:
   ~Fornecedor();
 
   bool repassaProdutos(std::string produto, int quantidade);
-
-  VectorSupermercado<Produto> getProdutos() {
-    return this->produtos;
-  }
-  void setProdutos(VectorSupermercado<Produto> p) {
-    this->produtos = p;
-  }
 };
 
 #endif // FORNECEDOR_H

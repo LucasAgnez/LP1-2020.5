@@ -116,7 +116,7 @@ int Estabelecimento::venda(int codigo){
 
 void Estabelecimento::registrar_venda(Produto item) {
   for(int i = 0; i < numero_vendas; i++){
-    if(produtos.at(i).codigo == vendas[i].codigo){
+    if(item.codigo == vendas[i].codigo){
       vendas[i].quantidade++;
       return;
     }

@@ -1,13 +1,13 @@
-#include "Cliente.h"
+#include "../include/Cliente.h"
 
 Cliente::Cliente() : loja(), saldo(100), tamanho_sacola(0), n_cliente(0)
 {
 }
 
-Cliente::Cliente(int n_cliente,Estabelecimento* loja) : loja(), saldo (100), tamanho_sacola(0)
+Cliente::Cliente(int n_client,Estabelecimento* Loja) : loja(), saldo (100), tamanho_sacola(0)
 {
-  this->n_cliente = n_cliente;
-  this->loja = loja;
+  this->n_cliente = n_client;
+  this->loja = Loja;
 }
 
 void Cliente::compra(){
@@ -32,7 +32,7 @@ void Cliente::compra(std::string produto, double preco){
       break;
     }
   }
-  if(item.preco > saldo){
+  if(preco > saldo){
     std::cout << "saldo insuficiente" << std::endl;
     return;
   }

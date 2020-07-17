@@ -1,6 +1,12 @@
-#include "Cliente.h"
+#include "../include/Cliente.h"
 
+<<<<<<< HEAD
 int main(int argc, char* argv[]){
+=======
+
+
+int main(){
+>>>>>>> refs/remotes/origin/Agnez
   int comm = 10, n_cliente = 0, aux = 1;
   Estabelecimento loja("estoque.csv");
   while(true){
