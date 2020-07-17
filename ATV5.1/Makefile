@@ -1,8 +1,5 @@
 GCC = g++
 GCC_FLAGS = -I include -std=c++11
-WARNINGS = -Wall -Wextra -pedantic -Wshadow -Wformat=2 -Wno-unused-result      \
-	-Wfloat-equal -Wconversion -Wlogical-op -Wshift-overflow=2                 \
-	-Wduplicated-cond -Wcast-qual -Wcast-align
 PROGRAMA = supermercado
 
 $(PROGRAMA): main.o  App.o Estabelecimento.o Cliente.o Fornecedor.o VectorSupermercado.o

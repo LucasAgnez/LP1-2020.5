@@ -10,12 +10,12 @@
 
 Fornecedor::Fornecedor()
 {
-  this->load();
+  load();
 }
 
 Fornecedor::~Fornecedor()
 {
-  this->update();
+  update();
 }
 
 bool repassaProdutos(std::string produto, int quantidade) {
@@ -46,7 +46,7 @@ void Fornecedor::load()
     produto.nome = line.substr(0,pos);
     line.erase(0, pos+1);
     produto.quantidade = set_int2(line);
-    produtos.push(produto);
+   // produtos.push(produto);
     quantidade_produtos++;
   }
 
@@ -57,7 +57,7 @@ void Fornecedor::listar()
 {
   std::cout << "PRODUTOS [QUANTIDADE]" << std::endl;
   for(int i = 0; i < quantidade_produtos; i++){
-    std::cout << produtos.at(i)->nome << " [" << produtos.at(i)->quantidade << "]" << std::endl;
+   // std::cout << produtos.at(i)->nome << " [" << produtos.at(i)->quantidade << "]" << std::endl;
   }
 }
 

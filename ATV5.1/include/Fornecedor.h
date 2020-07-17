@@ -18,12 +18,6 @@ public:
   void update();
   void listar();
 
-  VectorSupermercado<Produto> getProdutos() {
-    return this->produtos;
-  }
-  void setProdutos(VectorSupermercado<Produto> p) {
-    this->produtos = p;
-  }
 };
 
 #endif // FORNECEDOR_H

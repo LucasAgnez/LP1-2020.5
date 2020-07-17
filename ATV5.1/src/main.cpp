@@ -2,7 +2,7 @@
 
 
 
-int main(int argc, char* argv[]){
+int main(){
   int comm = 10, n_cliente = 0, aux = 1;
   Estabelecimento loja("estoque.csv");
   while(true){
