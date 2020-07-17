@@ -5,7 +5,7 @@
 #include "VectorSupermercado.h"
 #include "Estabelecimento.h"
 #include "Produto.h"
-#include "App.h"
+#include "Util.h"
 
 #include <iostream>
 #include <string>
@@ -36,7 +36,7 @@ class Estabelecimento{
 
     void reabastecerEstoque();
     void atualizar_estoque();
-    void aumentar_estoque();
+    // void aumentar_estoque();
 };
 
 

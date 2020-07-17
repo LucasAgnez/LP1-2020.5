@@ -11,8 +11,8 @@ $(PROGRAMA): main.o  App.o Estabelecimento.o Cliente.o VectorSupermercado.o Forn
 main.o: src/main.cpp
 	$(GCC) $(GCC_FLAGS) -c src/main.cpp
 
-App.o: src/App.cpp include/App.h
-	$(GCC) $(GCC_FLAGS) -c src/App.cpp
+App.o: src/Util.cpp include/Util.h
+	$(GCC) $(GCC_FLAGS) -c src/Util.cpp
 
 Estabelecimento.o: src/Estabelecimento.cpp include/Estabelecimento.h
 	$(GCC) $(GCC_FLAGS) -c src/Estabelecimento.cpp

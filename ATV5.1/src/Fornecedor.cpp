@@ -1,6 +1,7 @@
 #include "Fornecedor.h"
 #include "VectorSupermercado.h"
 #include "Produto.h"
+#include "Util.h"
 
 #include <string>
 #include <sstream>
@@ -19,8 +20,8 @@ Fornecedor::~Fornecedor()
 
 bool Fornecedor::repassaProdutos(std::string produto, int quantidade) {
   for (size_t i = 0; i < produtos.getSize(); i++) {
-    if ((produtos.at(i)->nome.compare(produto)) == 0 && produtos.at(i)->quantidade >= quantidade) {
-      produtos.at(i)->quantidade -= quantidade;
+    if ((produtos.at(i).nome.compare(produto)) == 0 && produtos.at(i).quantidade >= quantidade) {
+      produtos.at(i).quantidade -= quantidade;
       return true;
     }
   }
@@ -53,7 +54,7 @@ void Fornecedor::load()
     pos = line.find(delimiter);
     produto.nome = line.substr(0,pos);
     line.erase(0, pos+1);
-    quantidade = Util::stringToInt(line);
+    quantidade = set_int(line);
     produtos.push(produto);
   }
 

@@ -7,12 +7,7 @@ Estabelecimento::Estabelecimento() :
 {
   std::string linha;
   std::ifstream arquivo("estoque.csv");
-  produtos = new Produto[estoque];
   while(!arquivo.eof()){
-    if(quantidade_produtos >= estoque){
-      aumentar_estoque();
-      continue;
-    }
     getline(arquivo, linha);
     if (linha.size() == 0) {
       continue;
@@ -20,41 +15,40 @@ Estabelecimento::Estabelecimento() :
     if(linha.at(0) == 'C'){
       continue;
     }
-    else {
-      std::size_t found = linha.find(",");
-        produtos[quantidade_produtos].codigo = set_int2(linha.substr(0,found));
-        linha.erase(0, found + 1);
 
-      found = linha.find(",");
-        produtos[quantidade_produtos].nome = linha.substr(0,found);
-        linha.erase(0, found+1);
+    Produto p;
 
-      found = linha.find(",");
-        produtos[quantidade_produtos].unidade = linha.substr(0,found);
-        linha.erase(0, found+1);
+    std::size_t found = linha.find(",");
+    p.codigo = set_int2(linha.substr(0,found));
+    linha.erase(0, found + 1);
 
-      found = linha.find(",");
-        produtos[quantidade_produtos].preco = set_double(linha.substr(0,found));
-        linha.erase(0, found+1);
+    found = linha.find(",");
+    p.nome = linha.substr(0,found);
+    linha.erase(0, found+1);
 
-      found = linha.find(",");
-        produtos[quantidade_produtos].quantidade = set_int(linha);
-    }
+    found = linha.find(",");
+    p.unidade = linha.substr(0,found);
+    linha.erase(0, found+1);
+
+    found = linha.find(",");
+    p.preco = set_double(linha.substr(0,found));
+    linha.erase(0, found+1);
+
+    found = linha.find(",");
+    p.quantidade = set_int(linha);
+
+    produtos.push(p);
+
     quantidade_produtos++;
   }
 }
 
 Estabelecimento::Estabelecimento(std::string estoque_loja) :
-  estoque(200), quantidade_produtos(0), produtos(nullptr), lucro(0), numero_vendas(0), numero_clientes(0)
+  estoque(200), quantidade_produtos(0), lucro(0), numero_vendas(0), numero_clientes(0)
 {
   std::string linha;
   std::ifstream arquivo(estoque_loja);
-  produtos = new Produto[estoque];
   while(!arquivo.eof()){
-    if(quantidade_produtos >= estoque){
-      aumentar_estoque();
-      continue;
-    }
     getline(arquivo, linha);
     if (linha.size() == 0) {
       continue;
@@ -62,76 +56,67 @@ Estabelecimento::Estabelecimento(std::string estoque_loja) :
     if(linha.at(0) == 'C'){
       continue;
     }
-    else {
-      std::size_t found = linha.find(",");
-        produtos[quantidade_produtos].codigo = set_int2(linha.substr(0,found));
-        linha.erase(0, found + 1);
 
-      found = linha.find(",");
-        produtos[quantidade_produtos].nome = linha.substr(0,found);
-        linha.erase(0, found+1);
+    Produto p;
 
-      found = linha.find(",");
-        produtos[quantidade_produtos].unidade = linha.substr(0,found);
-        linha.erase(0, found+1);
+    std::size_t found = linha.find(",");
+    p.codigo = set_int2(linha.substr(0,found));
+    linha.erase(0, found + 1);
 
-      found = linha.find(",");
-        produtos[quantidade_produtos].preco = set_double(linha.substr(0,found));
-        linha.erase(0, found+1);
+    found = linha.find(",");
+    p.nome = linha.substr(0,found);
+    linha.erase(0, found+1);
 
-      found = linha.find(",");
-        produtos[quantidade_produtos].quantidade = set_int(linha);
-    }
+    found = linha.find(",");
+    p.unidade = linha.substr(0,found);
+    linha.erase(0, found+1);
+
+    found = linha.find(",");
+    p.preco = set_double(linha.substr(0,found));
+    linha.erase(0, found+1);
+
+    found = linha.find(",");
+    p.quantidade = set_int(linha);
+
+    produtos.push(p);
+
     quantidade_produtos++;
   }
 }
 
-Estabelecimento::~Estabelecimento(void)
+Estabelecimento::~Estabelecimento()
 {
-  delete[] produtos;
-}
-
-void Estabelecimento::aumentar_estoque(){
-   Produto *produtos2;
-   produtos2 = new Produto[estoque*2];
-   for(int i = 0; i < estoque; i++){
-     produtos2[i] = produtos[i];
-   }
-   estoque = estoque*2;
-   delete[] produtos;
-   produtos = produtos2;
 }
 
 void Estabelecimento::listar(){
   std::cout << std::endl;
-  for(int i = 0; i < estoque; i++){
-    if(produtos[i].quantidade > 0){
-      std::cout << produtos[i].quantidade << " " << produtos[i].unidade << "(s) de ";
-      std::cout << produtos[i].nome << std::endl;
+  for(int i = 0; i < produtos.getSize(); i++){
+    if(produtos.at(i).quantidade > 0){
+      std::cout << produtos.at(i).quantidade << " " << produtos.at(i).unidade << "(s) de ";
+      std::cout << produtos.at(i).nome << std::endl;
     }
   }
 }
 
 int Estabelecimento::venda(int codigo){
   for(int i = 0; i < quantidade_produtos; i++){
-    if(codigo == produtos[i].codigo){
-      if(produtos[i].quantidade == 0){
+    if(codigo == produtos.at(i).codigo){
+      if(produtos.at(i).quantidade == 0){
         std::cout << "Estoque esgotado :(" << std::endl;
         return 1;
       }
       std::cout << "Venda efetuada :)" << std::endl;
-      produtos[i].quantidade--;
-      lucro += produtos[i].preco;
-      registrar_venda(produtos[i]);
+      produtos.at(i).quantidade--;
+      lucro += produtos.at(i).preco;
+      registrar_venda(produtos.at(i));
     }
   }
   return 0;
 }
 
-void Estabelecimento::registrar_venda(Produto item)
-{
+void Estabelecimento::registrar_venda(Produto item) {
   for(int i = 0; i < numero_vendas; i++){
-    if(item.codigo == vendas[i].codigo){
+    if(produtos.at(i).codigo == vendas[i].codigo){
       vendas[i].quantidade++;
       return;
     }
@@ -147,11 +132,11 @@ void Estabelecimento::caixa(){
   caixa << "COD,PRODUTO,UNIDADE DE MEDIDA,PREÇO,QUANTIDADE" << std::endl;
   for(int i = 0; i < numero_vendas; i++){
     item = vendas[i];
-    caixa << item.codigo << ",";
-    caixa << item.nome << ",";
-    caixa << item.unidade << ",";
-    caixa << "\"R$ " << item.preco << "\",";
-    caixa << item.quantidade;
+    caixa << produtos.at(i).codigo << ",";
+    caixa << produtos.at(i).nome << ",";
+    caixa << produtos.at(i).unidade << ",";
+    caixa << "\"R$ " << produtos.at(i).preco << "\",";
+    caixa << produtos.at(i).quantidade;
     caixa << std::endl;
   }
   caixa << "Lucro total: " << lucro << std::endl;
@@ -167,26 +152,24 @@ void Estabelecimento::reabastecerEstoque() {
   std::cin >> quantidade;
 
   for (size_t i = 0; i < produtos.getSize(); i++) {
-    if (produtos.at(i)->codigo == codigo && fornecedor.repassaProdutos(produtos.at(i)->nome, quantidade)) {
-      produtos.at(i)->quantidade += quantidade;
+    if (produtos.at(i).codigo == codigo && fornecedor.repassaProdutos(produtos.at(i).nome, quantidade)) {
+      produtos.at(i).quantidade += quantidade;
       return;
     }
   }
-  std::cout << "O fornecdor não possue " << quantidade << " unidades de " << produtos.at(i)->nome << " disponíveis.";
+  std::cout << "O fornecdor não possue " << quantidade << " unidade(s) disponíveis.";
 }
 
 void Estabelecimento::atualizar_estoque(){
-  Produto item;
   std::ofstream estoque_novo("estoque.csv");
   estoque_novo << "COD,PRODUTO,UNIDADE DE MEDIDA,PREÇO,QUANTIDADE" << std::endl;
   for(int i = 0; i < quantidade_produtos; i++){
-    item = produtos[i];
-    if(item.quantidade > 0){
-      estoque_novo << item.codigo << ",";
-      estoque_novo << item.nome << ",";
-      estoque_novo << item.unidade << ",";
-      estoque_novo << "\"R$ " << item.preco << "\",";
-      estoque_novo << item.quantidade;
+    if(produtos.at(i).quantidade > 0){
+      estoque_novo << produtos.at(i).codigo << ",";
+      estoque_novo << produtos.at(i).nome << ",";
+      estoque_novo << produtos.at(i).unidade << ",";
+      estoque_novo << "\"R$ " << produtos.at(i).preco << "\",";
+      estoque_novo << produtos.at(i).quantidade;
       estoque_novo << std::endl;
     }
   }

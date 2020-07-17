@@ -1,4 +1,5 @@
 #include "VectorSupermercado.h"
+#include "Produto.h"
 
 template <class T>
 VectorSupermercado<T>::VectorSupermercado()
@@ -47,19 +48,15 @@ void VectorSupermercado<T>::push(T elemento){
 template <class T>
 void VectorSupermercado<T>::pop(){
   if(this->size == 0){
-    // Lançar exceção
     return;
   }
-
-  delete this->elementos[this->size-1];
   this->size--;
 }
 
 template <class T>
-T* VectorSupermercado<T>::at(size_t index) { 
+T& VectorSupermercado<T>::at(size_t index) { 
   if (index >= this->size) {
-    //Lança esceção
-    return nullptr;
+    throw std::out_of_range("Index out of range.");
   }
   return this->elementos[index]; 
 } 
@@ -68,3 +65,9 @@ template <class T>
 bool VectorSupermercado<T>::isEmpty(){
   return this->size > 0 ? false : true;
 }
+
+/**
+ * É preciso avisar previamente quais classes serão implementadas no template
+ * Caso contrário, occore erro de undefined reference
+ */
+template class VectorSupermercado<Produto>;

@@ -15,8 +15,8 @@ void Cliente::compra(){
   std::string produto;
   std::cin >> produto;
   for(int i = 0; i < loja->quantidade_produtos; i++){
-    if(loja->produtos[i].nome == produto){
-      compra(produto, loja->produtos[i].preco);
+    if(loja->produtos.at(i).nome == produto){
+      compra(produto, loja->produtos.at(i).preco);
       return;
     }
   }
@@ -27,8 +27,8 @@ void Cliente::compra(){
 void Cliente::compra(std::string produto, double preco){
   Produto item;
   for(int i = 0; i < loja->quantidade_produtos; i++){
-    if(produto == loja->produtos[i].nome){
-      item = loja->produtos[i];
+    if(produto == loja->produtos.at(i).nome){
+      item = loja->produtos.at(i);
       break;
     }
   }
@@ -39,7 +39,7 @@ void Cliente::compra(std::string produto, double preco){
   if(!(loja->venda(item.codigo)))
   {
     saldo -= item.preco;
-    sacola.push_back(item);
+    sacola.push(item);
     tamanho_sacola++;
     return;
   }
@@ -47,7 +47,7 @@ void Cliente::compra(std::string produto, double preco){
 
 void Cliente::ver_sacola(){
   for (int i = 0; i < tamanho_sacola; i++){
-      std::cout << sacola[i].nome << std::endl;
+      std::cout << sacola.at(i).nome << std::endl;
   }
 }
 
@@ -62,7 +62,7 @@ void Cliente::registro(){
   std::string nome_arquivo = stream.str();
   std::ofstream arquivo(nome_arquivo, std::ios::app);
   for (int i = 0; i < tamanho_sacola; i++){
-      arquivo << sacola[i].nome << " - R$ " << sacola[i].preco << std::endl;
+      arquivo << sacola.at(i).nome << " - R$ " << sacola.at(i).preco << std::endl;
   }
   arquivo.close();
 }

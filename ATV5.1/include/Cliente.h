@@ -4,6 +4,7 @@
 #include "Cliente.h"
 #include "Produto.h"
 #include "Estabelecimento.h"
+#include "VectorSupermercado.h"
 
 #include <iostream>
 #include <string>
@@ -19,7 +20,7 @@ class Cliente{
     Cliente(int n_cliente, Estabelecimento *loja);
     Estabelecimento *loja;
     double saldo;
-    std::vector<Produto> sacola;
+    VectorSupermercado<Produto> sacola;
     int tamanho_sacola;
     int n_cliente;
 

@@ -20,7 +20,7 @@ public:
 
   void push(T elemento);
   void pop();
-  T* at(size_t index);
+  T& at(size_t index);
   bool isEmpty();
 
   T* getElementos() {
