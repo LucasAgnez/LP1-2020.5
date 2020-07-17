@@ -2,12 +2,13 @@
 #define FORNECEDOR_H
 
 #include "VectorSupermercado.h"
-#include "Produto.h"
+#include "Produtos.h"
 
 class Fornecedor
 {
 private:
   VectorSupermercado<Produto> produtos;
+  int quantidade_produtos;
 
 public:
   Fornecedor();
@@ -15,6 +16,7 @@ public:
 
   void load();
   void update();
+  void listar();
 
   VectorSupermercado<Produto> getProdutos() {
     return this->produtos;

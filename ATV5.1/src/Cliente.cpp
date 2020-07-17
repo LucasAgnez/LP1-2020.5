@@ -1,4 +1,4 @@
-#include "Cliente.h"
+#include "../include/Cliente.h"
 
 Cliente::Cliente() : loja(), saldo(100), tamanho_sacola(0), n_cliente(0)
 {

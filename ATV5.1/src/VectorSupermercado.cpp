@@ -1,9 +1,9 @@
-#include "VectorSupermercado.h"
+#include "../include/VectorSupermercado.h"
 
 template <class T>
 VectorSupermercado<T>::VectorSupermercado()
   : size(0),
-    capacity(1), 
+    capacity(1),
     elementos(nullptr)
 {
   this->elementos = new T[this->capacity];
@@ -12,14 +12,14 @@ VectorSupermercado<T>::VectorSupermercado()
 template <class T>
 VectorSupermercado<T>::VectorSupermercado(size_t s)
   : size(s),
-    capacity(s*2 == 0 ? 1 : s*2), 
+    capacity(s*2 == 0 ? 1 : s*2),
     elementos(nullptr)
 {
   this->elementos = new T[this->capacity];
 }
 
 template <class T>
-VectorSupermercado<T>::~VectorSupermercado() 
+VectorSupermercado<T>::~VectorSupermercado()
 {
   delete[] this->elementos;
 }
@@ -38,7 +38,7 @@ template <class T>
 void VectorSupermercado<T>::push(T elemento){
   this->elementos[this->size] = elemento;
   this->size++;
-  
+
   if (this->size == this->capacity) {
     this->aumentaCapacity();
   }
@@ -56,13 +56,13 @@ void VectorSupermercado<T>::pop(){
 }
 
 template <class T>
-T* VectorSupermercado<T>::at(size_t index) { 
+T* VectorSupermercado<T>::at(size_t index) {
   if (index >= this->size) {
     //Lança esceção
     return nullptr;
   }
-  return this->elementos[index]; 
-} 
+  return this->elementos[index];
+}
 
 template <class T>
 bool VectorSupermercado<T>::isEmpty(){

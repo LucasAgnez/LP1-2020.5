@@ -1,4 +1,4 @@
-#include "Estabelecimento.h"
+#include "../include/Estabelecimento.h"
 
 
 
@@ -176,3 +176,4 @@ void Estabelecimento::atualizar_estoque(){
   }
   estoque_novo.close();
 }
+
