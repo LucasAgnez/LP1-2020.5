@@ -60,8 +60,7 @@ void Fornecedor::load()
   file.close();
 }
 
-void Fornecedor::listar()
-{
+void Fornecedor::listar() {
   std::cout << "PRODUTOS [QUANTIDADE]" << std::endl;
   for(int i = 0; i < quantidade_produtos; i++){
    // std::cout << produtos.at(i)->nome << " [" << produtos.at(i)->quantidade << "]" << std::endl;

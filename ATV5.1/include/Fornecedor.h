@@ -1,4 +1,4 @@
-#if !defined(FORNECEDOR_H)
+#ifndef FORNECEDOR_H
 #define FORNECEDOR_H
 
 #include "VectorSupermercado.h"
@@ -15,7 +15,8 @@ private:
 public:
   Fornecedor();
   ~Fornecedor();
-
+  
+  void listar();
   bool repassaProdutos(std::string produto, int quantidade);
 };
 

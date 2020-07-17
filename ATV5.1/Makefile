@@ -2,11 +2,7 @@ GCC = g++
 GCC_FLAGS = -I include -std=c++11
 PROGRAMA = supermercado
 
-<<<<<<< HEAD
 $(PROGRAMA): main.o  App.o Estabelecimento.o Cliente.o VectorSupermercado.o Fornecedor.o
-=======
-$(PROGRAMA): main.o  App.o Estabelecimento.o Cliente.o Fornecedor.o VectorSupermercado.o
->>>>>>> refs/remotes/origin/Agnez
 	$(GCC) $(GCC_FLAGS) -o supermercado *.o
 
 main.o: src/main.cpp
