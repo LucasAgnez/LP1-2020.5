@@ -3,7 +3,7 @@
 
 
 Estabelecimento::Estabelecimento() :
-  estoque(200), quantidade_produtos(0), lucro(0), numero_vendas(0), numero_clientes(0)
+  lucro(0), numero_vendas(0), numero_clientes(0)
 {
   std::string linha;
   std::ifstream arquivo("estoque.csv");
@@ -38,13 +38,11 @@ Estabelecimento::Estabelecimento() :
     p.quantidade = set_int(linha);
 
     produtos.push(p);
-
-    quantidade_produtos++;
   }
 }
 
 Estabelecimento::Estabelecimento(std::string estoque_loja) :
-  estoque(200), quantidade_produtos(0), lucro(0), numero_vendas(0), numero_clientes(0)
+  lucro(0), numero_vendas(0), numero_clientes(0)
 {
   std::string linha;
   std::ifstream arquivo(estoque_loja);
@@ -79,8 +77,6 @@ Estabelecimento::Estabelecimento(std::string estoque_loja) :
     p.quantidade = set_int(linha);
 
     produtos.push(p);
-
-    quantidade_produtos++;
   }
 }
 
@@ -99,7 +95,7 @@ void Estabelecimento::listar(){
 }
 
 int Estabelecimento::venda(int codigo){
-  for(int i = 0; i < quantidade_produtos; i++){
+  for(int i = 0; i < produtos.getSize(); i++){
     if(codigo == produtos.at(i).codigo){
       if(produtos.at(i).quantidade == 0){
         std::cout << "Estoque esgotado :(" << std::endl;
@@ -144,26 +140,37 @@ void Estabelecimento::caixa(){
 }
 
 void Estabelecimento::reabastecerEstoque() {
-  std::cout << "Digite o codigo do produto para ser reabastecido:";
-  int codigo;
-  std::cin >> codigo;
-  std::cout << "Digite a quantidade a ser reabastecida:";
-  int quantidade;
-  std::cin >> quantidade;
+  char comm;
+  std::cout << "1) Listar produtos do fornecedor" << std::endl;
+  std::cout << "2) Fazer pedido" << std::endl;
+  std::cin >> comm;
+  if (comm == '1')
+    fornecedor.listar();
+  else if(comm == '2'){
+    std::cout << "Digite o codigo do produto para ser reabastecido:";
+    int codigo;
+    std::cin >> codigo;
+    std::cout << "Digite a quantidade a ser reabastecida:";
+    int quantidade;
+    std::cin >> quantidade;
 
-  for (size_t i = 0; i < produtos.getSize(); i++) {
-    if (produtos.at(i).codigo == codigo && fornecedor.repassaProdutos(produtos.at(i).nome, quantidade)) {
-      produtos.at(i).quantidade += quantidade;
-      return;
+    for (size_t i = 0; i < produtos.getSize(); i++) {
+      if (produtos.at(i).codigo == codigo && fornecedor.repassaProdutos(produtos.at(i).nome, quantidade)) {
+        produtos.at(i).quantidade += quantidade;
+        return;
+      }
     }
+    std::cout << "O fornecdor não possue " << quantidade << " unidade(s) disponíveis.";
   }
-  std::cout << "O fornecdor não possue " << quantidade << " unidade(s) disponíveis.";
+  else{
+    std::cout << "Comando invalido" << std::endl;
+  }
 }
 
 void Estabelecimento::atualizar_estoque(){
   std::ofstream estoque_novo("estoque.csv");
   estoque_novo << "COD,PRODUTO,UNIDADE DE MEDIDA,PREÇO,QUANTIDADE" << std::endl;
-  for(int i = 0; i < quantidade_produtos; i++){
+  for(int i = 0; i < produtos.getSize(); i++){
     if(produtos.at(i).quantidade > 0){
       estoque_novo << produtos.at(i).codigo << ",";
       estoque_novo << produtos.at(i).nome << ",";

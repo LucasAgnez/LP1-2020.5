@@ -14,7 +14,7 @@ void Cliente::compra(){
   std::cout << "Digite o nome do produto que voce quer comprar" << std::endl;
   std::string produto;
   std::cin >> produto;
-  for(int i = 0; i < loja->quantidade_produtos; i++){
+  for(int i = 0; i < loja->produtos.getSize(); i++){
     if(loja->produtos.at(i).nome == produto){
       compra(produto, loja->produtos.at(i).preco);
       return;
@@ -26,7 +26,7 @@ void Cliente::compra(){
 
 void Cliente::compra(std::string produto, double preco){
   Produto item;
-  for(int i = 0; i < loja->quantidade_produtos; i++){
+  for(int i = 0; i < loja->produtos.getSize(); i++){
     if(produto == loja->produtos.at(i).nome){
       item = loja->produtos.at(i);
       break;

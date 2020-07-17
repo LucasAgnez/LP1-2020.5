@@ -21,8 +21,6 @@ class Estabelecimento{
     Estabelecimento();
     Estabelecimento(std::string estoque_loja);
     ~Estabelecimento();
-    int estoque;
-    int quantidade_produtos;
     VectorSupermercado<Produto> produtos;
     double lucro;
     std::vector<Produto> vendas;
@@ -36,7 +34,6 @@ class Estabelecimento{
 
     void reabastecerEstoque();
     void atualizar_estoque();
-    // void aumentar_estoque();
 };
 
 

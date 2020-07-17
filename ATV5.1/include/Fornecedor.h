@@ -8,7 +8,6 @@ class Fornecedor
 {
 private:
   VectorSupermercado<Produto> produtos;
-  int quantidade_produtos;
   void load();
   void update();
 
