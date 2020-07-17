@@ -34,7 +34,7 @@ class Estabelecimento{
     void registrar_venda(Produto item);
     void caixa();
 
-    void reabastecerEstoque(int codigo, int quantidade);
+    void reabastecerEstoque();
     void atualizar_estoque();
     void aumentar_estoque();
 };

@@ -27,9 +27,8 @@ int main(int argc, char* argv[]){
           cliente.ver_sacola();
         else if(comm == 4)
           cliente.compra();
-        else if(comm == 5) {
-
-        }
+        else if(comm == 5) 
+          loja.reabastecerEstoque();
         else
           std::cout << "Comando Invalido!" << std::endl;
       }

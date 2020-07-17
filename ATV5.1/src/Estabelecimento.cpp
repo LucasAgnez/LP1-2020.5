@@ -3,7 +3,7 @@
 
 
 Estabelecimento::Estabelecimento() :
-  estoque(200), quantidade_produtos(0), produtos(nullptr), lucro(0), numero_vendas(0), numero_clientes(0)
+  estoque(200), quantidade_produtos(0), lucro(0), numero_vendas(0), numero_clientes(0)
 {
   std::string linha;
   std::ifstream arquivo("estoque.csv");
@@ -158,14 +158,21 @@ void Estabelecimento::caixa(){
   caixa.close();
 }
 
-void Estabelecimento::reabastecerEstoque(int codigo, int quantidade) {
+void Estabelecimento::reabastecerEstoque() {
+  std::cout << "Digite o codigo do produto para ser reabastecido:";
+  int codigo;
+  std::cin >> codigo;
+  std::cout << "Digite a quantidade a ser reabastecida:";
+  int quantidade;
+  std::cin >> quantidade;
+
   for (size_t i = 0; i < produtos.getSize(); i++) {
-    if (produtos.at(i)->codigo == codigo) {
-      if (fornecedor.repassaProdutos(produtos.at(i)->nome, quantidade)) {
-        produtos.at(i)->quantidade += quantidade;
-      }
+    if (produtos.at(i)->codigo == codigo && fornecedor.repassaProdutos(produtos.at(i)->nome, quantidade)) {
+      produtos.at(i)->quantidade += quantidade;
+      return;
     }
   }
+  std::cout << "O fornecdor não possue " << quantidade << " unidades de " << produtos.at(i)->nome << " disponíveis.";
 }
 
 void Estabelecimento::atualizar_estoque(){

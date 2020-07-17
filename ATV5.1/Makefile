@@ -5,7 +5,7 @@ WARNINGS = -Wall -Wextra -pedantic -Wshadow -Wformat=2 -Wno-unused-result      \
 	-Wduplicated-cond -Wcast-qual -Wcast-align
 PROGRAMA = supermercado
 
-$(PROGRAMA): main.o  App.o Estabelecimento.o Cliente.o VectorSupermercado.o
+$(PROGRAMA): main.o  App.o Estabelecimento.o Cliente.o VectorSupermercado.o Fornecedor.o
 	$(GCC) $(GCC_FLAGS) -o supermercado *.o
 
 main.o: src/main.cpp
