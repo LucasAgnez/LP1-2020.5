@@ -1,8 +1,10 @@
 #ifndef W5_ESTABELECIMENTO_H
 #define W5_ESTABELECIMENTO_H
 
+#include "Fornecedor.h"
+#include "VectorSupermercado.h"
 #include "Estabelecimento.h"
-#include "Produtos.h"
+#include "Produto.h"
 #include "App.h"
 
 #include <iostream>
@@ -13,13 +15,15 @@
 #include <vector>
 
 class Estabelecimento{
+  private:
+    Fornecedor fornecedor;
   public:
     Estabelecimento();
     Estabelecimento(std::string estoque_loja);
     ~Estabelecimento();
     int estoque;
     int quantidade_produtos;
-    Produto* produtos;
+    VectorSupermercado<Produto> produtos;
     double lucro;
     std::vector<Produto> vendas;
     int numero_vendas;
@@ -29,8 +33,9 @@ class Estabelecimento{
     int venda(int codigo);
     void registrar_venda(Produto item);
     void caixa();
-    void atualizar_estoque();
 
+    void reabastecerEstoque(int codigo, int quantidade);
+    void atualizar_estoque();
     void aumentar_estoque();
 };
 

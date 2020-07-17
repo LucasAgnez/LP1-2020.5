@@ -1,5 +1,5 @@
 #include "Estabelecimento.h"
-
+#include "Fornecedor.h"
 
 
 Estabelecimento::Estabelecimento() :
@@ -86,7 +86,6 @@ Estabelecimento::Estabelecimento(std::string estoque_loja) :
   }
 }
 
-
 Estabelecimento::~Estabelecimento(void)
 {
   delete[] produtos;
@@ -157,6 +156,16 @@ void Estabelecimento::caixa(){
   }
   caixa << "Lucro total: " << lucro << std::endl;
   caixa.close();
+}
+
+void Estabelecimento::reabastecerEstoque(int codigo, int quantidade) {
+  for (size_t i = 0; i < produtos.getSize(); i++) {
+    if (produtos.at(i)->codigo == codigo) {
+      if (fornecedor.repassaProdutos(produtos.at(i)->nome, quantidade)) {
+        produtos.at(i)->quantidade += quantidade;
+      }
+    }
+  }
 }
 
 void Estabelecimento::atualizar_estoque(){

@@ -1,7 +1,5 @@
 #include "Cliente.h"
 
-
-
 int main(int argc, char* argv[]){
   int comm = 10, n_cliente = 0, aux = 1;
   Estabelecimento loja("estoque.csv");
@@ -29,6 +27,9 @@ int main(int argc, char* argv[]){
           cliente.ver_sacola();
         else if(comm == 4)
           cliente.compra();
+        else if(comm == 5) {
+
+        }
         else
           std::cout << "Comando Invalido!" << std::endl;
       }
