@@ -7,7 +7,9 @@
 #include <string>
 #include <sstream>
 
-void menu();
+void menu_restaurante();
+
+void menu_supermercado();
 
 double set_double(std::string prec);
 

@@ -2,7 +2,7 @@
 #include <sstream>
 #include <fstream>
 
-void menu(){
+void menu_supermercado(){
   std::cout << std::endl;
   std::cout << "Comandos:" << std::endl;
   std::cout << "  1) Adicionar saldo ao cliente atual" << std::endl;
@@ -13,6 +13,16 @@ void menu(){
   std::cout << "  0) Encerra compras do cliente" << std::endl << std::endl;
 }
 
+void menu_restaurante(){
+  std::cout << std::endl;
+  std::cout << "Comandos:" << std::endl;
+  std::cout << "  1) Adicionar saldo ao cliente atual" << std::endl;
+  std::cout << "  2) Listar produtos da loja" << std::endl;
+  std::cout << "  3) Ver sacola do cliente atual" << std::endl;
+  std::cout << "  4) Comprar item" << std::endl;
+  std::cout << "  0) Encerra compras do cliente" << std::endl << std::endl;
+
+}
 double set_double(std::string prec){
   std::stringstream stream(prec);
   char discard;

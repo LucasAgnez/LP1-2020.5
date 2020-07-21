@@ -20,7 +20,7 @@ int main(int argc, char* argv[]){
          if(aux == 1){
            Cliente cliente(n_cliente_supermercado, &loja);
            while(true){
-             menu();
+             menu_supermercado();
              std::cin >> comm;
              if(comm == 0){
                limpar_registro(n_cliente_supermercado);
@@ -58,7 +58,7 @@ int main(int argc, char* argv[]){
          if(aux == 1){
            Cliente cliente(n_cliente_restaurante, &loja);
            while(true){
-             menu();
+             menu_restaurante();
              std::cin >> comm;
              if(comm == 0){
                limpar_registro(n_cliente_restaurante);
