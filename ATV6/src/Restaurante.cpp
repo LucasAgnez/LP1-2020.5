@@ -2,12 +2,28 @@
 
 Restaurante::Restaurante() : Estabelecimento("menu.csv")
 {
-  load();
+  try
+  {
+    load();
+  }
+  catch(const std::exception& e)
+  {
+    std::cerr << e.what() << '\n';
+    exit(1);
+  }
 }
 
 Restaurante::Restaurante(std::string menuFilename) : Estabelecimento(menuFilename)
 {
-  load();
+  try
+  {
+    load();
+  }
+  catch(const std::exception& e)
+  {
+    std::cerr << e.what() << '\n';
+    exit(1);
+  }
 }
 
 Restaurante::~Restaurante()
@@ -17,6 +33,12 @@ Restaurante::~Restaurante()
 void Restaurante::load() {
   std::string linha;
   std::ifstream arquivo(filename);
+
+  if (!arquivo.is_open() || arquivo.fail()) {
+    throw std::runtime_error("O arquivo não existe no caminho especificado.");
+    return;
+  }
+
   while(!arquivo.eof()){
     getline(arquivo, linha);
 

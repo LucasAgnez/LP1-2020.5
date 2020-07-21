@@ -4,7 +4,7 @@ PROGRAMA = supermercado
 
 ALUNOS = ArturMeloSantiagoFerreira_LucasAgnezLima
 
-$(PROGRAMA): main.o  Util.o Estabelecimento.o Cliente.o VectorSupermercado.o Fornecedor.o Supermercado.o Restaurante.o
+$(PROGRAMA): main.o  Util.o Estabelecimento.o Cliente.o VectorSupermercado.o Fornecedor.o Supermercado.o Restaurante.o NegocioException.o
 	$(GCC) $(GCC_FLAGS) -o supermercado *.o
 
 zip: src/* include/*
@@ -33,6 +33,9 @@ Supermercado.o: src/Supermercado.cpp include/Supermercado.h
 
 Restaurante.o: src/Restaurante.cpp include/Restaurante.h
 	$(GCC) $(GCC_FLAGS) -c src/Restaurante.cpp
+
+NegocioException.o: src/NegocioException.cpp include/NegocioException.h
+	$(GCC) $(GCC_FLAGS) -c src/NegocioException.cpp
 
 clean:
 	rm *.o $(PROGRAMA)

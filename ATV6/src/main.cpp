@@ -1,6 +1,7 @@
 #include "Cliente.h"
+#include "NegocioException.h"
 
-int main(int argc, char* argv[]){
+int main(int argc, char* argv[]){  
    int comm = 10, n_cliente_restaurante = 0, n_cliente_supermercado = 0, aux = 1;
    while(true){
      std::cout << "1) Supermercado" << std::endl;

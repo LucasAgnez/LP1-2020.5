@@ -28,6 +28,8 @@ void Estabelecimento::registrar_venda(Produto item) {
   numero_vendas++;
 }
 
+int Estabelecimento::venda(int codigo){}
+
 void Estabelecimento::caixa(std::string tipo){
   Produto item;
   std::string arquivo_caixa = tipo + "_caixa.csv";

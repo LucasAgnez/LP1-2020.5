@@ -28,9 +28,9 @@ class Estabelecimento{
     int numero_vendas;
     int numero_clientes;
 
+    void caixa(std::string tipo);
     int venda(int codigo);
     void registrar_venda(Produto item);
-    void caixa(std::string tipo);
 
     void listar();
     void load();

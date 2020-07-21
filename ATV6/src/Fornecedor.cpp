@@ -10,7 +10,15 @@
 
 Fornecedor::Fornecedor()
 {
-  load();
+  try
+  {
+    load();
+  }
+  catch(const std::exception& e)
+  {
+    std::cerr << e.what() << '\n';
+    exit(1);
+  }
 }
 
 Fornecedor::~Fornecedor()
@@ -32,7 +40,7 @@ bool Fornecedor::repassaProdutos(std::string produto, int quantidade) {
 void Fornecedor::load() {
   std::ifstream file("fornecedor.csv");
   if (!file.is_open() || file.fail()) {
-    throw std::runtime_error("O arquivo não existe no caminho especificado em \"supermercado.config\".");
+    throw std::runtime_error("O arquivo não existe no caminho especificado.");
     return;
   }
 
