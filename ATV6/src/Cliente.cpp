@@ -13,13 +13,13 @@ Cliente::Cliente(int n_client,Estabelecimento* Loja) : loja(), saldo (100), tama
 void Cliente::compra(){
   std::cout << "Digite o nome do produto que voce quer comprar" << std::endl;
   std::string produto;
+  std::cin.ignore();
   std::getline(std::cin, produto);
-  std::cout << produto << std::endl;
   for(int i = 0; i < loja->produtos.getSize(); i++){
-    // if(loja->produtos.at(i).nome == produto){
-    //   compra(produto, loja->produtos.at(i).preco);
-    //   return;
-    // }
+    if(loja->produtos.at(i).nome == produto){
+      compra(produto, loja->produtos.at(i).preco);
+      return;
+    }
   }
   std::cout << "Produto nao encontrado!" << std::endl;
   std::cout << "verifique a escrita!" << std::endl;

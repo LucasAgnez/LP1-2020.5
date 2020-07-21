@@ -104,3 +104,19 @@ void Supermercado::atualizarEstoque() {
   }
   estoque_novo.close();
 }
+
+int Supermercado::venda(int codigo) {
+  for(int i = 0; i < produtos.getSize(); i++){
+    if(codigo == produtos.at(i).codigo){
+      if(produtos.at(i).quantidade == 0){
+        std::cout << "Estoque esgotado :(" << std::endl;
+        return 1;
+      }
+      std::cout << "Venda efetuada :)" << std::endl;
+      produtos.at(i).quantidade--;
+      lucro += produtos.at(i).preco;
+      registrar_venda(produtos.at(i));
+    }
+  }
+  return 0;
+}

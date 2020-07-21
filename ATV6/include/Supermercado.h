@@ -16,6 +16,7 @@ public:
   // Carregar o arquivo estoque.csv
   void load();
   void listar();
+  int venda(int codigo);
 
   void reabastecerEstoque();
   void atualizarEstoque();
