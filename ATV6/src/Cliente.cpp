@@ -51,9 +51,9 @@ void Cliente::ver_sacola(){
   }
 }
 
-void Cliente::registro(){
+void Cliente::registro(std::string tipo){
   n_cliente += 1;
-  std::string nome_cliente = "cliente_";
+  std::string nome_cliente = "cliente_" + tipo;
   std::string extensao = ".txt";
   std::stringstream stream;
   stream << nome_cliente;

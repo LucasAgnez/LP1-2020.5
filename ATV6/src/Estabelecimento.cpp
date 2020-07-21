@@ -44,9 +44,10 @@ void Estabelecimento::registrar_venda(Produto item) {
   numero_vendas++;
 }
 
-void Estabelecimento::caixa(){
+void Estabelecimento::caixa(std::string tipo){
   Produto item;
-  std::ofstream caixa("caixa.csv");
+  std::string arquivo_caixa = tipo + "_caixa.csv";
+  std::ofstream caixa(arquivo_caixa);
   caixa << "COD,PRODUTO,UNIDADE DE MEDIDA,PREÇO,QUANTIDADE" << std::endl;
   for(int i = 0; i < numero_vendas; i++){
     item = vendas[i];

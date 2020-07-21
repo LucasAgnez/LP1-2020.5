@@ -5,6 +5,8 @@
 #include "Produto.h"
 #include "Estabelecimento.h"
 #include "VectorSupermercado.h"
+#include "Restaurante.h"
+#include "Supermercado.h"
 
 #include <iostream>
 #include <string>
@@ -27,7 +29,7 @@ class Cliente{
     void compra();
     void compra(std::string produto, double preco);
     void ver_sacola();
-    void registro();
+    void registro(std::string tipo);
     void adicionar_saldo();
 };
 

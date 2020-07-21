@@ -30,7 +30,7 @@ class Estabelecimento{
 
     int venda(int codigo);
     void registrar_venda(Produto item);
-    void caixa();
+    void caixa(std::string tipo);
 
     void listar();
     void load();

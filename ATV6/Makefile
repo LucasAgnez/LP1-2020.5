@@ -4,16 +4,16 @@ PROGRAMA = supermercado
 
 ALUNOS = ArturMeloSantiagoFerreira_LucasAgnezLima
 
-$(PROGRAMA): main.o  App.o Estabelecimento.o Cliente.o VectorSupermercado.o Fornecedor.o Supermercado.o Restaurante.o
+$(PROGRAMA): main.o  Util.o Estabelecimento.o Cliente.o VectorSupermercado.o Fornecedor.o Supermercado.o Restaurante.o
 	$(GCC) $(GCC_FLAGS) -o supermercado *.o
 
-zip: src/* include/* 
+zip: src/* include/*
 	zip $(ALUNOS).zip src/* include/* Makefile README.md .gitignore estoque.csv fornecedor.csv menu.csv
 
 main.o: src/main.cpp
 	$(GCC) $(GCC_FLAGS) -c src/main.cpp
 
-App.o: src/Util.cpp include/Util.h
+Util.o: src/Util.cpp include/Util.h
 	$(GCC) $(GCC_FLAGS) -c src/Util.cpp
 
 Estabelecimento.o: src/Estabelecimento.cpp include/Estabelecimento.h
@@ -33,6 +33,6 @@ Supermercado.o: src/Supermercado.cpp include/Supermercado.h
 
 Restaurante.o: src/Restaurante.cpp include/Restaurante.h
 	$(GCC) $(GCC_FLAGS) -c src/Restaurante.cpp
-	
+
 clean:
 	rm *.o $(PROGRAMA)
