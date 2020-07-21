@@ -19,9 +19,7 @@ double set_double(std::string prec){
   double preco;
   stream >> discard;
   stream >> discard;
-  stream >> discard;
   stream >> preco;
-  stream >> discard;
   return preco;
 }
 
