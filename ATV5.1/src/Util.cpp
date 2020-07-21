@@ -18,10 +18,11 @@ double set_double(std::string prec){
   char discard;
   double preco;
   stream >> discard;
+  std::cout << "discard:" << discard << std::endl;
   stream >> discard;
-  stream >> discard;
+  std::cout << "discard:" << discard << std::endl;
   stream >> preco;
-  stream >> discard;
+  std::cout << "preco:" << preco << std::endl;
   return preco;
 }
 

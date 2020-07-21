@@ -1,5 +1,5 @@
-#ifndef FORNECEDOR_H
-#define FORNECEDOR_H
+#ifndef W5_FORNECEDOR_H
+#define W5_FORNECEDOR_H
 
 #include "VectorSupermercado.h"
 #include "Produto.h"
@@ -19,4 +19,4 @@ public:
   bool repassaProdutos(std::string produto, int quantidade);
 };
 
-#endif // FORNECEDOR_H
+#endif // W5_FORNECEDOR_H

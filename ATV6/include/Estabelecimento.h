@@ -15,25 +15,25 @@
 #include <vector>
 
 class Estabelecimento{
-  private:
-    Fornecedor fornecedor;
+  protected:
+    std::string filename;
   public:
     Estabelecimento();
-    Estabelecimento(std::string estoque_loja);
+    Estabelecimento(std::string filename);
     ~Estabelecimento();
+
     VectorSupermercado<Produto> produtos;
     double lucro;
     std::vector<Produto> vendas;
     int numero_vendas;
     int numero_clientes;
 
-    void listar();
     int venda(int codigo);
     void registrar_venda(Produto item);
     void caixa();
 
-    void reabastecerEstoque();
-    void atualizar_estoque();
+    void listar();
+    void load();
 };
 
 
