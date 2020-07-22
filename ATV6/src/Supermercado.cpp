@@ -1,4 +1,5 @@
 #include "Supermercado.h"
+#include "NegocioException.h"
 
 Supermercado::Supermercado() : Estabelecimento("estoque.csv")
 {
@@ -12,7 +13,7 @@ Supermercado::Supermercado(std::string estoqueFilename) : Estabelecimento(estoqu
 
 Supermercado::~Supermercado()
 {
-  atualizarEstoque();  
+  atualizarEstoque();
 }
 
 void Supermercado::load() {
@@ -20,17 +21,13 @@ void Supermercado::load() {
   std::ifstream arquivo(filename);
   while(!arquivo.eof()){
     getline(arquivo, linha);
-    if (linha.size() == 0) {
-      continue;
-    }
-    if(linha.at(0) == 'C'){
+    if (linha.size() == 0 || linha.at(0) == 'C'){
       continue;
     }
 
     Produto p;
-
     std::size_t found = linha.find(",");
-    p.codigo = set_int2(linha.substr(0,found));
+    p.codigo = set_int(linha.substr(0,found));
     linha.erase(0, found + 1);
 
     found = linha.find(",");
@@ -79,12 +76,18 @@ void Supermercado::reabastecerEstoque() {
     std::cin >> quantidade;
 
     for (size_t i = 0; i < produtos.getSize(); i++) {
-      if (produtos.at(i).codigo == codigo && fornecedor.repassaProdutos(produtos.at(i).nome, quantidade)) {
+      if (produtos.at(i).codigo == codigo) {
+
+        try {
+          fornecedor.repassaProdutos(produtos.at(i).nome, quantidade);
+        } catch(NegocioException& e) {
+          std::cerr << e.what() << '\n';
+        }
+
         produtos.at(i).quantidade += quantidade;
         return;
       }
     }
-    std::cout << "O fornecdor não possue " << quantidade << " unidade(s) disponíveis.";
   }
   else{
     std::cout << "Comando invalido" << std::endl;
@@ -94,13 +97,24 @@ void Supermercado::reabastecerEstoque() {
 void Supermercado::atualizarEstoque() {
   std::ofstream estoque_novo(filename);
   estoque_novo << "COD,PRODUTO,UNIDADE DE MEDIDA,PREÇO,QUANTIDADE" << std::endl;
-  for(int i = 0; i < produtos.getSize(); i++){
+  for(size_t i = 0; i < produtos.getSize(); i++){
     estoque_novo << produtos.at(i).codigo << ",";
     estoque_novo << produtos.at(i).nome << ",";
     estoque_novo << produtos.at(i).unidade << ",";
-    estoque_novo << "\"R$ " << produtos.at(i).preco << "\",";
+    estoque_novo << "R$ " << produtos.at(i).preco << ",";
     estoque_novo << produtos.at(i).quantidade;
     estoque_novo << std::endl;
   }
   estoque_novo.close();
+}
+
+void Supermercado::venda(Produto& produto) {
+  if(produto.quantidade == 0) {
+    throw NegocioException("Estoque esgotado :(");
+  }
+
+  produto.quantidade--;
+  lucro += produto.preco;
+  registrar_venda(produto);
+  std::cout << "Venda efetuada :)" << std::endl;
 }

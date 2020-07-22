@@ -1,57 +1,100 @@
 #include "Cliente.h"
+#include "NegocioException.h"
+#include "Util.h"
 
-Cliente::Cliente() : loja(), saldo(100), tamanho_sacola(0), n_cliente(0)
+template <class T>
+Cliente<T>::Cliente() : loja(), saldo(0), n_cliente(0)
 {
 }
 
-Cliente::Cliente(int n_client,Estabelecimento* Loja) : loja(), saldo (100), tamanho_sacola(0)
+template <class T>
+Cliente<T>::Cliente(int n_client, T* Loja) : loja(), saldo (0)
 {
   this->n_cliente = n_client;
   this->loja = Loja;
 }
 
-void Cliente::compra(){
-  std::cout << "Digite o nome do produto que voce quer comprar" << std::endl;
+template <class T>
+void Cliente<T>::compra(){
+  std::cout << "Digite o nome do produto que você quer comprar" << std::endl;
   std::string produto;
-  std::cin >> produto;
+  std::cin.ignore();
+  std::getline(std::cin, produto);
+
+  try {
+    /*Se for um pedido no restaurante, pede a quantidade do produto*/
+    if (std::is_same<T, Restaurante>::value) {
+      std::cout << "Digite a quantidade do produto que você quer comprar" << std::endl;
+      int quantidade;
+      std::cin >> quantidade;
+      compra(produto, quantidade);
+    } else {
+      compra(produto);
+    }
+  } catch(NegocioException& e) {
+    std::cerr << e.what() << '\n';
+  }
+}
+
+
+template <class T>
+void Cliente<T>::compra(std::string produto, int quantidade /*= 1*/) {
+
+  int indexProduto = -1;
   for(size_t i = 0; i < loja->produtos.getSize(); i++){
     if(loja->produtos.at(i).nome == produto){
-      compra(produto, loja->produtos.at(i).preco);
+      indexProduto = (int)i;
+    }
+  }
+
+  if (indexProduto == -1) {
+    throw NegocioException("Produto não encontrado! Verifique a escrita.");
+  }
+
+  if(loja->produtos.at(indexProduto).preco * quantidade > saldo) {
+    throw NegocioException("Saldo insuficiente. Saldo atual de " + std::to_string(saldo));
+    return;
+  }
+
+  try {
+    loja->venda(loja->produtos.at(indexProduto));
+  } catch(NegocioException& e) {
+    std::cerr << e.what() << '\n';
+    return;
+  }
+
+  saldo -= loja->produtos.at(indexProduto).preco;
+
+  /*Procura pelo produto comprado na sacola*/
+  for (size_t i = 0; i < sacola.getSize(); i++) {
+    if (sacola.at(i).nome == loja->produtos.at(indexProduto).nome) {
+      /* Caso o produto já exista apenas adiciona a quantidade solicitada ao produto da sacola*/
+      sacola.at(i).quantidade += quantidade;
       return;
     }
   }
-  std::cout << "Produto nao encontrado!" << std::endl;
-  std::cout << "verifique a escrita!" << std::endl;
+
+  /*Caso não tenha comprado nenhuma unidade do produto ainda, cria um novo e defini a quantidade igual a solicitada */
+  Produto produtoVendido = loja->produtos.at(indexProduto);
+  produtoVendido.quantidade = quantidade;
+  sacola.push(produtoVendido);
 }
 
-void Cliente::compra(std::string produto, double preco){
-  Produto item;
-  for(size_t i = 0; i < loja->produtos.getSize(); i++){
-    if(produto == loja->produtos.at(i).nome){
-      item = loja->produtos.at(i);
+template <class T>
+void Cliente<T>::ver_sacola(){
+  for (size_t i = 0; i < sacola.getSize(); i++){
+
+    if (sacola.at(i).unidade.empty()) {
+      std::cout << sacola.at(i).quantidade << " " << sacola.at(i).nome << "(s)"<< std::endl;
       break;
     }
-  }
-  if(preco > saldo){
-    std::cout << "saldo insuficiente" << std::endl;
-    return;
-  }
-  if(!(loja->venda(item.codigo)))
-  {
-    saldo -= item.preco;
-    sacola.push(item);
-    tamanho_sacola++;
-    return;
+
+    std::cout << sacola.at(i).quantidade << " " << sacola.at(i).unidade << "(s) de " << sacola.at(i).nome << std::endl;
   }
 }
 
-void Cliente::ver_sacola(){
-  for (int i = 0; i < tamanho_sacola; i++){
-      std::cout << sacola.at(i).nome << std::endl;
-  }
-}
-
-void Cliente::registro(std::string tipo){
+template <class T>
+void Cliente<T>::registro(std::string tipo){
   n_cliente += 1;
   std::string nome_cliente = "cliente_" + tipo;
   std::string extensao = ".txt";
@@ -61,15 +104,24 @@ void Cliente::registro(std::string tipo){
   stream << extensao;
   std::string nome_arquivo = stream.str();
   std::ofstream arquivo(nome_arquivo, std::ios::app);
-  for (int i = 0; i < tamanho_sacola; i++){
-      arquivo << sacola.at(i).nome << " - R$ " << sacola.at(i).preco << std::endl;
+  for (size_t i = 0; i < sacola.getSize(); i++){
+      arquivo << sacola.at(i).nome << " - " << double_to_string(sacola.at(i).preco) << std::endl;
   }
   arquivo.close();
 }
 
-void Cliente::adicionar_saldo(){
+template <class T>
+void Cliente<T>::adicionar_saldo(){
   std::cout << "Quanto adicinar?" << std::endl;
   double dinheiro;
   std::cin >> dinheiro;
   this->saldo += dinheiro;
 }
+
+
+/**
+ * É preciso avisar previamente quais classes serão implementadas no template
+ * Caso contrário, occore erro de undefined reference
+ */
+template class Cliente<Supermercado>;
+template class Cliente<Restaurante>;

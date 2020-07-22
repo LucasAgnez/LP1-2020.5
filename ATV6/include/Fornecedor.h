@@ -16,7 +16,7 @@ public:
   ~Fornecedor();
   
   void listar();
-  bool repassaProdutos(std::string produto, int quantidade);
+  void repassaProdutos(std::string produto, int quantidade);
 };
 
 #endif // W5_FORNECEDOR_H

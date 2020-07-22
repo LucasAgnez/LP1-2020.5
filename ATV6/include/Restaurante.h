@@ -13,6 +13,7 @@ public:
   // Carregar o arquivo menu.csv
   void load();
   void listar();
+  void venda(Produto& produto);
 };
 
 #endif // W5_RESTAURANTE_H

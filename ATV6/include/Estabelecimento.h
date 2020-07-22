@@ -25,12 +25,11 @@ class Estabelecimento{
     VectorSupermercado<Produto> produtos;
     double lucro;
     std::vector<Produto> vendas;
-    int numero_vendas;
     int numero_clientes;
 
-    int venda(int codigo);
-    void registrar_venda(Produto item);
     void caixa(std::string tipo);
+    void venda(Produto& produto);
+    void registrar_venda(Produto item);
 
     void listar();
     void load();
