@@ -10,7 +10,7 @@ void menu_supermercado(){
   std::cout << "  3) Ver sacola do cliente atual" << std::endl;
   std::cout << "  4) Comprar item" << std::endl;
   std::cout << "  5) Reabastecer estoque" << std::endl;
-  std::cout << "  0) Encerra compras do cliente" << std::endl << std::endl;
+  std::cout << "  6) Encerra compras do cliente" << std::endl << std::endl;
 }
 
 void menu_restaurante(){
@@ -20,7 +20,7 @@ void menu_restaurante(){
   std::cout << "  2) Listar produtos da loja" << std::endl;
   std::cout << "  3) Ver sacola do cliente atual" << std::endl;
   std::cout << "  4) Comprar item" << std::endl;
-  std::cout << "  0) Encerra compras do cliente" << std::endl << std::endl;
+  std::cout << "  5) Encerra compras do cliente" << std::endl << std::endl;
 
 }
 double set_double(std::string prec){

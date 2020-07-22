@@ -6,25 +6,26 @@ int main(int argc, char *argv[]) {
   while (true) {
     std::cout << "1) Supermercado" << std::endl;
     std::cout << "2) Restaurante" << std::endl;
-    std::cout << "0) Encerrar" << std::endl;
+    std::cout << "3) Encerrar" << std::endl;
     std::cin >> comm;
-    if (comm == 0)
+    if (comm == 3)
       break;
     if (comm == 1) {
       Supermercado loja;
       while (true) {
         std::cout << "1) Novo Cliente" << std::endl;
-        std::cout << "0) Finalizar compras" << std::endl;
+        std::cout << "2) Finalizar compras" << std::endl;
         std::cin >> aux;
         ;
-        if (aux == 0)
+        if (aux == 2)
           break;
         if (aux == 1) {
           Cliente<Supermercado> cliente(n_cliente_supermercado, &loja);
           while (true) {
             menu_supermercado();
+            std::cout << comm << std::endl;
             std::cin >> comm;
-            if (comm == 0) {
+            if (comm == 6) {
               limpar_registro(n_cliente_supermercado, "supermercado");
               cliente.registro("supermercado");
               n_cliente_supermercado++;
@@ -54,10 +55,10 @@ int main(int argc, char *argv[]) {
       Restaurante loja;
       while (true) {
         std::cout << "1) Novo Cliente" << std::endl;
-        std::cout << "0) Finalizar" << std::endl;
+        std::cout << "2) Finalizar" << std::endl;
         std::cin >> aux;
         ;
-        if (aux == 0)
+        if (aux == 2)
           break;
         if (aux == 1) {
           Cliente<Restaurante> cliente(n_cliente_restaurante, &loja);
@@ -65,7 +66,7 @@ int main(int argc, char *argv[]) {
             menu_restaurante();
             std::cin >> comm;
 
-            if (comm == 0) {
+            if (comm == 5) {
               limpar_registro(n_cliente_restaurante, "restaurante");
               cliente.registro("restaurante");
               n_cliente_restaurante++;
