@@ -28,7 +28,7 @@ void Estabelecimento::registrar_venda(Produto item) {
   numero_vendas++;
 }
 
-int Estabelecimento::venda(int codigo){}
+void Estabelecimento::venda(Produto& produto){}
 
 void Estabelecimento::caixa(std::string tipo){
   Produto item;

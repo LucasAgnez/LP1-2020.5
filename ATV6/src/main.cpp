@@ -19,7 +19,7 @@ int main(int argc, char* argv[]){
          if (aux == 0)
            break;
          if(aux == 1){
-           Cliente cliente(n_cliente_supermercado, &loja);
+           Cliente<Supermercado> cliente(n_cliente_supermercado, &loja);
            while(true){
              menu_supermercado();
              std::cin >> comm;
@@ -57,7 +57,7 @@ int main(int argc, char* argv[]){
          if (aux == 0)
            break;
          if(aux == 1){
-           Cliente cliente(n_cliente_restaurante, &loja);
+           Cliente<Restaurante> cliente(n_cliente_restaurante, &loja);
            while(true){
              menu_restaurante();
              std::cin >> comm;

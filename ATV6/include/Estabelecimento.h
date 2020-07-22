@@ -29,7 +29,7 @@ class Estabelecimento{
     int numero_clientes;
 
     void caixa(std::string tipo);
-    int venda(int codigo);
+    void venda(Produto& produto);
     void registrar_venda(Produto item);
 
     void listar();

@@ -1,4 +1,5 @@
 #include "Supermercado.h"
+#include "NegocioException.h"
 
 Supermercado::Supermercado() : Estabelecimento("estoque.csv")
 {
@@ -20,15 +21,11 @@ void Supermercado::load() {
   std::ifstream arquivo(filename);
   while(!arquivo.eof()){
     getline(arquivo, linha);
-    if (linha.size() == 0) {
-      continue;
-    }
-    if(linha.at(0) == 'C'){
+    if (linha.size() == 0 || linha.at(0) == 'C'){
       continue;
     }
 
     Produto p;
-
     std::size_t found = linha.find(",");
     p.codigo = set_int2(linha.substr(0,found));
     linha.erase(0, found + 1);
@@ -105,18 +102,13 @@ void Supermercado::atualizarEstoque() {
   estoque_novo.close();
 }
 
-int Supermercado::venda(int codigo) {
-  for(int i = 0; i < produtos.getSize(); i++){
-    if(codigo == produtos.at(i).codigo){
-      if(produtos.at(i).quantidade == 0){
-        std::cout << "Estoque esgotado :(" << std::endl;
-        return 1;
-      }
-      std::cout << "Venda efetuada :)" << std::endl;
-      produtos.at(i).quantidade--;
-      lucro += produtos.at(i).preco;
-      registrar_venda(produtos.at(i));
-    }
+void Supermercado::venda(Produto& produto) {
+  if(produto.quantidade == 0) {
+    throw NegocioException("Estoque esgotado :(");
   }
-  return 0;
+
+  std::cout << "Venda efetuada :)" << std::endl;
+  produto.quantidade--;
+  lucro += produto.preco;
+  registrar_venda(produto);
 }
