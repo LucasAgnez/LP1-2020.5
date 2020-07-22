@@ -3,12 +3,12 @@
 
 
 Estabelecimento::Estabelecimento() :
-  lucro(0), numero_vendas(0), numero_clientes(0), filename("")
+  lucro(0), numero_clientes(0), filename("")
 {
 }
 
 Estabelecimento::Estabelecimento(std::string filename) :
-  lucro(0), numero_vendas(0), numero_clientes(0), filename(filename)
+  lucro(0), numero_clientes(0), filename(filename)
 {
 }
 
@@ -17,15 +17,13 @@ Estabelecimento::~Estabelecimento()
 }
 
 void Estabelecimento::registrar_venda(Produto item) {
-  for(int i = 0; i < numero_vendas; i++){
-    if(item.codigo == vendas[i].codigo){
-      vendas[i].quantidade++;
+  for(int i = 0; i < vendas.size(); i++){
+    if(item.nome == vendas[i].nome){
+      vendas[i].quantidade += item.quantidade;
       return;
     }
   }
-  item.quantidade = 1;
   vendas.push_back(item);
-  numero_vendas++;
 }
 
 void Estabelecimento::venda(Produto& produto){}
@@ -35,12 +33,12 @@ void Estabelecimento::caixa(std::string tipo){
   std::string arquivo_caixa = tipo + "_caixa.csv";
   std::ofstream caixa(arquivo_caixa);
   caixa << "COD,PRODUTO,UNIDADE DE MEDIDA,PREÇO,QUANTIDADE" << std::endl;
-  for(int i = 0; i < numero_vendas; i++){
+  for(int i = 0; i < vendas.size(); i++){
     item = vendas[i];
     caixa << produtos.at(i).codigo << ",";
     caixa << produtos.at(i).nome << ",";
     caixa << produtos.at(i).unidade << ",";
-    caixa << "\"R$ " << produtos.at(i).preco << "\",";
+    caixa << "R$ " << produtos.at(i).preco << ",";
     caixa << produtos.at(i).quantidade;
     caixa << std::endl;
   }

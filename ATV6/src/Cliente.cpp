@@ -15,17 +15,23 @@ Cliente<T>::Cliente(int n_client, T* Loja) : loja(), saldo (0)
 
 template <class T>
 void Cliente<T>::compra(){
-  std::cout << "Digite o nome do produto que voce quer comprar" << std::endl;
+  std::cout << "Digite o nome do produto que você quer comprar" << std::endl;
   std::string produto;
   std::cin.ignore();
   std::getline(std::cin, produto);
-
+  
   try {
-    compra(produto);
-    return;
+    /*Se for um pedido no restaurante, pede a quantidade do produto*/
+    if (std::is_same<T, Restaurante>::value) {
+      std::cout << "Digite a quantidade do produto que você quer comprar" << std::endl;
+      int quantidade;
+      std::cin >> quantidade;
+      compra(produto, quantidade);
+    } else {
+      compra(produto);
+    }
   } catch(NegocioException& e) {
     std::cerr << e.what() << '\n';
-    return;
   }
 }
 
@@ -58,30 +64,29 @@ void Cliente<T>::compra(std::string produto, int quantidade /*= 1*/) {
   saldo -= loja->produtos.at(indexProduto).preco;
 
   /*Procura pelo produto comprado na sacola*/
-  size_t indexProdutoSacola = -1;
   for (size_t i = 0; i < sacola.getSize(); i++) {
     if (sacola.at(i).nome == loja->produtos.at(indexProduto).nome) {
-      indexProdutoSacola = i;
-      break;
+      /* Caso o produto já exista apenas adiciona a quantidade solicitada ao produto da sacola*/
+      sacola.at(i).quantidade += quantidade;
+      return;
     } 
   }
 
   /*Caso não tenha comprado nenhuma unidade do produto ainda, cria um novo e defini a quantidade igual a solicitada */
-  if (indexProdutoSacola == -1) {
-    Produto produtoVendido = loja->produtos.at(indexProduto);
-    produtoVendido.quantidade = quantidade;
-    sacola.push(produtoVendido);
-    return;
-  }
-  
-  /* Caso o produto já exista apenas adiciona a quantidade solicitada ao produto da sacola*/
-  sacola.at(indexProdutoSacola).quantidade += quantidade;
-
+  Produto produtoVendido = loja->produtos.at(indexProduto);
+  produtoVendido.quantidade = quantidade;
+  sacola.push(produtoVendido);
 }
 
 template <class T>
 void Cliente<T>::ver_sacola(){
   for (int i = 0; i < sacola.getSize(); i++){
+
+    if (sacola.at(i).unidade.empty()) {
+      std::cout << sacola.at(i).quantidade << " " << sacola.at(i).nome << "(s)"<< std::endl;
+      break;
+    }
+    
     std::cout << sacola.at(i).quantidade << " " << sacola.at(i).unidade << "(s) de " << sacola.at(i).nome << std::endl;
   }
 }

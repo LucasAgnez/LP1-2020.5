@@ -72,14 +72,8 @@ void Restaurante::listar() {
   }
 }
 
-// int Restaurante::venda(int codigo) {
-//   for(int i = 0; i < produtos.getSize(); i++){
-//     if(codigo == produtos.at(i).codigo){
-//       std::cout << "Venda efetuada :)" << std::endl;
-//       produtos.at(i).quantidade--;
-//       lucro += produtos.at(i).preco;
-//       registrar_venda(produtos.at(i));
-//     }
-//   }
-//   return 0;
-// }
+void Restaurante::venda(Produto& produto) {
+  lucro += produto.preco;
+  registrar_venda(produto);
+  std::cout << "Venda efetuada :)" << std::endl;
+}

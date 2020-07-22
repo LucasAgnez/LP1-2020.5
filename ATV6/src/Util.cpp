@@ -40,13 +40,6 @@ int set_int(std::string cod){
   return codigo;
 }
 
-int set_int2(std::string cod){
-  std::stringstream stream(cod);
-  int codigo;
-  stream >> codigo;
-  return codigo;
-}
-
 void limpar_registro(int n){
   n += 1;
   std::string nome_cliente = "cliente_";

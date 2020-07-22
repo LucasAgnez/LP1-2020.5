@@ -2,6 +2,7 @@
 #include "VectorSupermercado.h"
 #include "Produto.h"
 #include "Util.h"
+#include "NegocioException.h"
 
 #include <string>
 #include <sstream>
@@ -26,14 +27,15 @@ Fornecedor::~Fornecedor()
   update();
 }
 
-bool Fornecedor::repassaProdutos(std::string produto, int quantidade) {
+void Fornecedor::repassaProdutos(std::string produto, int quantidade) {
   for (size_t i = 0; i < produtos.getSize(); i++) {
-    if ((produtos.at(i).nome.compare(produto)) == 0 && produtos.at(i).quantidade >= quantidade) {
+    if ((produtos.at(i).nome.compare(produto)) == 0) {
+      if (produtos.at(i).quantidade >= quantidade) {
+        throw NegocioException("O fornecdor não possui " + std::to_string(quantidade) + " unidade(s) disponíveis.");
+      }
       produtos.at(i).quantidade -= quantidade;
-      return true;
     }
   }
-  return false;
 }
 
 
@@ -66,7 +68,7 @@ void Fornecedor::load() {
     pos = line.find(delimiter);
     produto.nome = line.substr(0,pos);
     line.erase(0, pos+1);
-    produto.quantidade = set_int2(line);
+    produto.quantidade = set_int(line);
     produtos.push(produto);
   }
 

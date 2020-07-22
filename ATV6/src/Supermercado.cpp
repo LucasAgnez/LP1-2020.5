@@ -27,7 +27,7 @@ void Supermercado::load() {
 
     Produto p;
     std::size_t found = linha.find(",");
-    p.codigo = set_int2(linha.substr(0,found));
+    p.codigo = set_int(linha.substr(0,found));
     linha.erase(0, found + 1);
 
     found = linha.find(",");
@@ -76,12 +76,18 @@ void Supermercado::reabastecerEstoque() {
     std::cin >> quantidade;
 
     for (size_t i = 0; i < produtos.getSize(); i++) {
-      if (produtos.at(i).codigo == codigo && fornecedor.repassaProdutos(produtos.at(i).nome, quantidade)) {
+      if (produtos.at(i).codigo == codigo) {
+
+        try {
+          fornecedor.repassaProdutos(produtos.at(i).nome, quantidade);
+        } catch(NegocioException& e) {
+          std::cerr << e.what() << '\n';
+        }
+        
         produtos.at(i).quantidade += quantidade;
         return;
       }
     }
-    std::cout << "O fornecdor não possue " << quantidade << " unidade(s) disponíveis.";
   }
   else{
     std::cout << "Comando invalido" << std::endl;
@@ -95,7 +101,7 @@ void Supermercado::atualizarEstoque() {
     estoque_novo << produtos.at(i).codigo << ",";
     estoque_novo << produtos.at(i).nome << ",";
     estoque_novo << produtos.at(i).unidade << ",";
-    estoque_novo << "\"R$ " << produtos.at(i).preco << "\",";
+    estoque_novo << "R$ " << produtos.at(i).preco << ",";
     estoque_novo << produtos.at(i).quantidade;
     estoque_novo << std::endl;
   }
@@ -107,8 +113,8 @@ void Supermercado::venda(Produto& produto) {
     throw NegocioException("Estoque esgotado :(");
   }
 
-  std::cout << "Venda efetuada :)" << std::endl;
   produto.quantidade--;
   lucro += produto.preco;
   registrar_venda(produto);
+  std::cout << "Venda efetuada :)" << std::endl;
 }

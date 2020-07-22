@@ -25,7 +25,6 @@ class Estabelecimento{
     VectorSupermercado<Produto> produtos;
     double lucro;
     std::vector<Produto> vendas;
-    int numero_vendas;
     int numero_clientes;
 
     void caixa(std::string tipo);
