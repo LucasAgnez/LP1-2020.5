@@ -17,6 +17,7 @@ public:
   void load();
   void listar();
   void venda(Produto& produto);
+  void caixa();
 
   void reabastecerEstoque();
   void atualizarEstoque();

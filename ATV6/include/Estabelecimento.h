@@ -27,7 +27,6 @@ class Estabelecimento{
     std::vector<Produto> vendas;
     int numero_clientes;
 
-    void caixa(std::string tipo);
     void venda(Produto& produto);
     void registrar_venda(Produto item);
 

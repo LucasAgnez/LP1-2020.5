@@ -47,7 +47,7 @@ int main(int argc, char *argv[]) {
         else
           std::cout << "Comando invalido!" << std::endl;
       }
-      loja.caixa("supermercado");
+      loja.caixa();
       loja.atualizarEstoque();
     }
     if (comm == 2) {
@@ -86,7 +86,7 @@ int main(int argc, char *argv[]) {
         else
           std::cout << "Comando invalido!" << std::endl;
       }
-      loja.caixa("restaurante");
+      loja.caixa();
     }
   }
   return 0;

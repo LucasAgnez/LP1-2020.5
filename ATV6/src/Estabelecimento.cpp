@@ -26,22 +26,6 @@ void Estabelecimento::registrar_venda(Produto item) {
   vendas.push_back(item);
 }
 
-void Estabelecimento::venda(Produto& produto){}
 
-void Estabelecimento::caixa(std::string tipo){
-  Produto item;
-  std::string arquivo_caixa = tipo + "_caixa.csv";
-  std::ofstream caixa(arquivo_caixa);
-  caixa << "COD,PRODUTO,UNIDADE DE MEDIDA,PREÇO,QUANTIDADE" << std::endl;
-  for(size_t i = 0; i < vendas.size(); i++){
-    item = vendas[i];
-    caixa << produtos.at(i).codigo << ",";
-    caixa << produtos.at(i).nome << ",";
-    caixa << produtos.at(i).unidade << ",";
-    caixa << "R$ " << produtos.at(i).preco << ",";
-    caixa << produtos.at(i).quantidade;
-    caixa << std::endl;
-  }
-  caixa << "Lucro total: " << lucro << std::endl;
-  caixa.close();
-}
+
+

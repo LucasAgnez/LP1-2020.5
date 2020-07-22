@@ -30,8 +30,8 @@ Fornecedor::~Fornecedor()
 void Fornecedor::repassaProdutos(std::string produto, int quantidade) {
   for (size_t i = 0; i < produtos.getSize(); i++) {
     if ((produtos.at(i).nome.compare(produto)) == 0) {
-      if (produtos.at(i).quantidade >= quantidade) {
-        throw NegocioException("O fornecdor não possui " + std::to_string(quantidade) + " unidade(s) disponíveis.");
+      if (produtos.at(i).quantidade <= quantidade) {
+        throw NegocioException("O fornecedor não possui " + std::to_string(quantidade) + " unidade(s) disponíveis.");
       }
       produtos.at(i).quantidade -= quantidade;
     }

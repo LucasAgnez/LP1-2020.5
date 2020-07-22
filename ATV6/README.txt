@@ -13,11 +13,14 @@ $ ./supermercado
 ```
 Necessary files:
   estoque.csv - in format: "COD,PRODUTO,UNIDADE_DE_MEDIDA,PREÇO,QUANTIDADE" (The product price must be separated by dot)
+  fornecedor.csv - in format: "PRODUTO,QUANTIDADE"
+  menu.csv - in format: "ITEM,PRECO" (The product price must be separeted by dot)
 
 Generated output files:
 - estoque.csv
 - caixa.csv
-- cliente_x.txt
+- cliente_supermercado_x.txt
+- cliente_restaurante_x.txt
 - fornecedor.csv
 
 GROUP:
@@ -30,4 +33,4 @@ GROUP:
   </p>
 </blockquote>
 
-  
+

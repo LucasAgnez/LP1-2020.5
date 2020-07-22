@@ -74,7 +74,23 @@ void Restaurante::listar() {
 }
 
 void Restaurante::venda(Produto& produto) {
-  lucro += produto.preco;
+  lucro += produto.preco * produto.quantidade;
   registrar_venda(produto);
   std::cout << "Venda efetuada :)" << std::endl;
+}
+
+void Restaurante::caixa(){
+  Produto item;
+  std::string arquivo_caixa = "restaurante_caixa.csv";
+  std::ofstream caixa(arquivo_caixa);
+  caixa << "PRODUTO,PREÇO,QUANTIDADE" << std::endl;
+  for(size_t i = 0; i < vendas.size(); i++){
+    item = vendas[i];
+    caixa << item.nome << ",";
+    caixa << double_to_string(item.preco) << ",";
+    caixa << item.quantidade;
+    caixa << std::endl;
+  }
+  caixa << "Lucro total: " << double_to_string(lucro) << std::endl;
+  caixa.close();
 }

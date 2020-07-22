@@ -56,8 +56,11 @@ void Cliente<T>::compra(std::string produto, int quantidade /*= 1*/) {
     return;
   }
 
+  Produto produtoVendido = loja->produtos.at(indexProduto);
+  produtoVendido.quantidade = quantidade;
+
   try {
-    loja->venda(loja->produtos.at(indexProduto));
+    loja->venda(produtoVendido);
   } catch(NegocioException& e) {
     std::cerr << e.what() << '\n';
     return;
@@ -75,8 +78,6 @@ void Cliente<T>::compra(std::string produto, int quantidade /*= 1*/) {
   }
 
   /*Caso não tenha comprado nenhuma unidade do produto ainda, cria um novo e defini a quantidade igual a solicitada */
-  Produto produtoVendido = loja->produtos.at(indexProduto);
-  produtoVendido.quantidade = quantidade;
   sacola.push(produtoVendido);
 }
 
@@ -96,7 +97,7 @@ void Cliente<T>::ver_sacola(){
 template <class T>
 void Cliente<T>::registro(std::string tipo){
   n_cliente += 1;
-  std::string nome_cliente = "cliente_" + tipo;
+  std::string nome_cliente = "cliente_" + tipo + "_";
   std::string extensao = ".txt";
   std::stringstream stream;
   stream << nome_cliente;

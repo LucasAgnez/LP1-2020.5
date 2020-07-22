@@ -118,3 +118,21 @@ void Supermercado::venda(Produto& produto) {
   registrar_venda(produto);
   std::cout << "Venda efetuada :)" << std::endl;
 }
+
+void Supermercado::caixa(){
+  Produto item;
+  std::string arquivo_caixa = "supermercado_caixa.csv";
+  std::ofstream caixa(arquivo_caixa);
+  caixa << "COD,PRODUTO,UNIDADE DE MEDIDA,PREÇO,QUANTIDADE" << std::endl;
+  for(size_t i = 0; i < vendas.size(); i++){
+    item = vendas[i];
+    caixa << item.codigo << ",";
+    caixa << item.nome << ",";
+    caixa << item.unidade << ",";
+    caixa << "R$ " << item.preco << ",";
+    caixa << item.quantidade + 1;
+    caixa << std::endl;
+  }
+  caixa << "Lucro total: " << lucro << std::endl;
+  caixa.close();
+}
