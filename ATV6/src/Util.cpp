@@ -40,6 +40,27 @@ int set_int(std::string cod){
   return codigo;
 }
 
+std::string double_to_string(double d) {
+  std::stringstream stream;
+  stream << "R$ " << d;
+
+  std::string value_s = stream.str();
+  
+  size_t pos = value_s.find(".");
+  
+  if (pos == std::string::npos) {
+    value_s.replace(value_s.length(), 0, ".00");
+    return value_s;
+  }
+
+  // Retira-se 2 do tamanho caso comAspas = true (aumenta o tamanho da string)
+  if (value_s.length()-1 - pos < 2) {
+    value_s.replace(value_s.length(), 0, "0");
+  }
+  
+  return value_s;
+}
+
 void limpar_registro(int n){
   n += 1;
   std::string nome_cliente = "cliente_";

@@ -1,5 +1,6 @@
 #include "Cliente.h"
 #include "NegocioException.h"
+#include "Util.h"
 
 template <class T>
 Cliente<T>::Cliente() : loja(), saldo(0), n_cliente(0)
@@ -103,7 +104,7 @@ void Cliente<T>::registro(std::string tipo){
   std::string nome_arquivo = stream.str();
   std::ofstream arquivo(nome_arquivo, std::ios::app);
   for (int i = 0; i < sacola.getSize(); i++){
-      arquivo << sacola.at(i).nome << " - R$ " << sacola.at(i).preco << std::endl;
+      arquivo << sacola.at(i).nome << " - " << double_to_string(sacola.at(i).preco) << std::endl;
   }
   arquivo.close();
 }

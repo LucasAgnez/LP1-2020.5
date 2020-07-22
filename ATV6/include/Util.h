@@ -17,4 +17,6 @@ int set_int(std::string cod);
 
 void limpar_registro(int n);
 
+std::string double_to_string(double d);
+
 #endif

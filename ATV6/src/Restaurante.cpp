@@ -1,4 +1,5 @@
 #include "Restaurante.h"
+#include "Util.h"
 
 Restaurante::Restaurante() : Estabelecimento("menu.csv")
 {
@@ -64,11 +65,11 @@ void Restaurante::load() {
 
 void Restaurante::listar() {
   std::cout << std::endl;
-  std::cout << "_________ MENU _________" <<std::endl;
+  std::cout << std::string(27, '_') << " MENU " << std::string(26, '_') << std::endl;
   for(int i = 0; i < produtos.getSize(); i++){
     std::cout << produtos.at(i).nome 
-              << " " << std::string(45-produtos.at(i).nome.size(), '-') << " " 
-              << produtos.at(i).preco << std::endl;
+              << " " << std::string(50- (produtos.at(i).nome.size() + 1), '-') << " " 
+              << double_to_string(produtos.at(i).preco) << std::endl;
   }
 }
 
