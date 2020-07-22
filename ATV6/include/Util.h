@@ -19,4 +19,6 @@ void limpar_registro(int n, std::string tipo);
 
 std::string double_to_string(double d);
 
+void verificaEntrada(int& comm);
+
 #endif

@@ -1,4 +1,7 @@
 #include "Util.h"
+#include "NegocioException.h"
+
+
 #include <sstream>
 #include <fstream>
 
