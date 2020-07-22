@@ -23,7 +23,7 @@ int main(int argc, char* argv[]){
              menu_supermercado();
              std::cin >> comm;
              if(comm == 0){
-               limpar_registro(n_cliente_supermercado);
+               limpar_registro(n_cliente_supermercado, "supermercado");
                cliente.registro("supermercado");
                n_cliente_supermercado++;
                break;
@@ -61,7 +61,7 @@ int main(int argc, char* argv[]){
              menu_restaurante();
              std::cin >> comm;
              if(comm == 0){
-               limpar_registro(n_cliente_restaurante);
+               limpar_registro(n_cliente_restaurante, "restaurante");
                cliente.registro("restaurante");
                n_cliente_restaurante++;
                break;

@@ -47,9 +47,10 @@ int set_int2(std::string cod){
   return codigo;
 }
 
-void limpar_registro(int n){
+void limpar_registro(int n, std::string tipo){
   n += 1;
   std::string nome_cliente = "cliente_";
+  nome_cliente = nome_cliente + tipo + "_";
   std::string extensao = ".txt";
   std::stringstream stream;
   stream << nome_cliente;
